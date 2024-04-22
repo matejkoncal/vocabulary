@@ -2,6 +2,7 @@ import "./App.scss";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Card } from "./card/card";
+import { AppBar, Toolbar } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -12,6 +13,9 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <AppBar position="fixed">
+        <Toolbar></Toolbar>
+      </AppBar>
       <CssBaseline />
       <Card top="Top" bottom="Bottom" />
     </ThemeProvider>
