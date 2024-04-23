@@ -13,7 +13,16 @@ export const SourceSelector = ({ onFileSelected }: SourceSelectorProps) => {
         <Typography display="flex" alignItems="center" justifyContent="center" variant="h5">
           or
         </Typography>
-        <Button variant="outlined">Generate by AI</Button>
+        <Button
+          sx={{
+            "&:focus": {
+              outline: "none",
+            },
+          }}
+          variant="outlined"
+        >
+          Generate by AI
+        </Button>
       </Stack>
     </Container>
   );

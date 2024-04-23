@@ -9,7 +9,15 @@ export const SelectFileButton = ({ onFileSelected }: SelectFileButtonProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <>
-      <Button onClick={() => inputRef.current?.click()} variant="outlined">
+      <Button
+        sx={{
+          "&:focus": {
+            outline: "none",
+          },
+        }}
+        onClick={() => inputRef.current?.click()}
+        variant="outlined"
+      >
         Use local file
       </Button>
       <input

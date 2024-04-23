@@ -33,7 +33,15 @@ function App() {
       <CssBaseline />
       <AppBar position="fixed">
         <Toolbar sx={{ justifyContent: "end" }}>
-          <IconButton onClick={() => setTheme(theme.palette.mode === "dark" ? lightTheme : darkTheme)} color="inherit">
+          <IconButton
+            sx={{
+              "&:focus": {
+                outline: "none",
+              },
+            }}
+            onClick={() => setTheme(theme.palette.mode === "dark" ? lightTheme : darkTheme)}
+            color="inherit"
+          >
             {theme.palette.mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
         </Toolbar>
