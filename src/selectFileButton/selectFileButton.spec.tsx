@@ -7,7 +7,7 @@ describe("selectFileButton", () => {
     const onFileSelect = jest.fn();
     const { getByTestId, getByText } = render(<SelectFileButton onFileSelected={onFileSelect} />);
 
-    const button = getByText("Use local file");
+    const button = getByText("Upload file");
     button.click();
 
     const fileInput = getByTestId("file-input");

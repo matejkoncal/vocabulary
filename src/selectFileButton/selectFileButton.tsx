@@ -18,7 +18,7 @@ export const SelectFileButton = ({ onFileSelected }: SelectFileButtonProps) => {
         onClick={() => inputRef.current?.click()}
         variant="outlined"
       >
-        Use local file
+        Upload file
       </Button>
       <input
         ref={inputRef}
