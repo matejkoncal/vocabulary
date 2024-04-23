@@ -26,7 +26,7 @@ const darkTheme = createTheme({
 
 function App() {
   const [cardsSource, setCardsSource] = useState<CardSource[] | undefined>();
-  const [theme, setTheme] = useState(getSystemTheme() === "light" ? darkTheme : lightTheme);
+  const [theme, setTheme] = useState(getSystemTheme() === "light" ? lightTheme : darkTheme);
 
   return (
     <ThemeProvider theme={theme}>
