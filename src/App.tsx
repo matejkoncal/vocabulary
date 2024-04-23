@@ -13,10 +13,10 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <AppBar position="fixed">
         <Toolbar></Toolbar>
       </AppBar>
-      <CssBaseline />
       <Card top="Top" bottom="Bottom" />
     </ThemeProvider>
   );
