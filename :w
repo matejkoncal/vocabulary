@@ -1,0 +1,36 @@
+import { Button, Stack } from "@mui/material";
+import { CardSource } from "../utils/utils";
+import { Card } from "../card/card";
+import { useState } from "react";
+
+interface CardsPlayerProps {
+  cardsSource: CardSource[];
+}
+
+export const CardsPlayer = ({ cardsSource }: CardsPlayerProps) => {
+  const [selectedCard, setSelectedCard] = useState<CardSource>(cardsSource[0]);
+
+  return (
+    <Stack spacing={2} alignItems="center">
+      <Card top={selectedCard.top} bottom={selectedCard.bottom} />
+      <Stack sx={{ width: "600px" }} justifyContent="space-between" alignItems="center" direction="row">
+        <Button
+          onClick={() => {
+            const previousIndex = cardsSource.indexOf(selectedCard) - 1;
+            setSelectedCard(cardsSource[previousIndex]);
+          }}
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={() => {
+            const nextIndex = cardsSource.indexOf(selectedCard) + 1;
+            setSelectedCard(cardsSource[nextIndex]);
+          }}
+        >
+          Next
+        </Button>
+      </Stack>
+    </Stack>
+  );
+};

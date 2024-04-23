@@ -1,11 +1,15 @@
 import { Container, Stack } from "@mui/material";
 import { SelectFileButton } from "../selectFileButton/selectFileButton";
 
-export const SourceSelector = () => {
+interface SourceSelectorProps {
+  onFileSelected?: (file: File) => void;
+}
+
+export const SourceSelector = ({ onFileSelected }: SourceSelectorProps) => {
   return (
     <Container style={{ maxWidth: "600px" }}>
       <Stack spacing={2}>
-        <SelectFileButton />
+        <SelectFileButton onFileSelected={onFileSelected} />
       </Stack>
     </Container>
   );
