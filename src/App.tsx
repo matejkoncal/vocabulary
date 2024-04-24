@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AppBar, Box, Fade, IconButton, Stack, Toolbar } from "@mui/material";
 import { CardsPlayer } from "./carsPlayer/cardsPlayer";
 import { useState } from "react";
-import { CardSource } from "./utils/utils";
+import { CardSource, downloadFile } from "./utils/utils";
 import { SourceSelector } from "./sourceSelector/sourceSelector";
 import Snipet from "./assets/carbon.svg";
 import SnipetLight from "./assets/carbonLight.svg";
@@ -13,6 +13,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import { TypeAnimation } from "react-type-animation";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const lightTheme = createTheme({
   palette: {
@@ -40,17 +41,33 @@ function App() {
       <AppBar position="fixed">
         <Toolbar sx={{ justifyContent: cardsSource ? "space-between" : "end" }}>
           {cardsSource && (
-            <IconButton
-              sx={{
-                "&:focus": {
-                  outline: "none",
-                },
-              }}
-              onClick={() => setCardsSource(undefined)}
-              color="inherit"
-            >
-              <ArrowBackIcon />
-            </IconButton>
+            <Stack direction="row">
+              <IconButton
+                sx={{
+                  "&:focus": {
+                    outline: "none",
+                  },
+                }}
+                onClick={() => setCardsSource(undefined)}
+                color="inherit"
+              >
+                <ArrowBackIcon />
+              </IconButton>
+              <IconButton
+                sx={{
+                  "&:focus": {
+                    outline: "none",
+                  },
+                }}
+                onClick={() => {
+                  const textFile = cardsSource.map(card => `${card.top} - ${card.bottom}`).join("\n");
+                  downloadFile(textFile);
+                }}
+                color="inherit"
+              >
+                <DownloadIcon />
+              </IconButton>
+            </Stack>
           )}
           <IconButton
             sx={{

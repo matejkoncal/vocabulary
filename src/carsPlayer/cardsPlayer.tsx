@@ -15,6 +15,11 @@ export const CardsPlayer = ({ cardsSource }: CardsPlayerProps) => {
       <Card top={selectedCard.top} bottom={selectedCard.bottom} />
       <Stack width="600px" justifyContent="space-around" alignItems="center" direction="row">
         <Button
+          sx={{
+            "&:focus": {
+              outline: "none",
+            },
+          }}
           onClick={() => {
             const previousIndex = cardsSource.indexOf(selectedCard) - 1;
 
@@ -28,6 +33,11 @@ export const CardsPlayer = ({ cardsSource }: CardsPlayerProps) => {
           Previous
         </Button>
         <Button
+          sx={{
+            "&:focus": {
+              outline: "none",
+            },
+          }}
           onClick={() => {
             const nextIndex = cardsSource.indexOf(selectedCard) + 1;
 

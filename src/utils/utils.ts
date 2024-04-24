@@ -14,3 +14,17 @@ export function parseSourcedFile(file: string): CardSource[] {
     })
     .filter(Boolean) as CardSource[];
 }
+
+export function downloadFile(file: string) {
+  const link = document.createElement("a");
+  const blob = new Blob([file], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  link.href = url;
+  link.download = "vocabulary.txt";
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
+}
