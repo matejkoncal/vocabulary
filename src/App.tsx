@@ -4,15 +4,15 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AppBar, Box, Fade, IconButton, Stack, Toolbar } from "@mui/material";
 import { CardsPlayer } from "./carsPlayer/cardsPlayer";
 import { useState } from "react";
-import { CardSource, parseSourcedFile } from "./utils/utils";
+import { CardSource } from "./utils/utils";
 import { SourceSelector } from "./sourceSelector/sourceSelector";
-import { AsyncTextFileReader } from "./asyncTextFileReader/asyncTextFileReader";
 import Snipet from "./assets/carbon.svg";
 import SnipetLight from "./assets/carbonLight.svg";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { TypeAnimation } from "react-type-animation";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const lightTheme = createTheme({
   palette: {
@@ -32,12 +32,26 @@ function App() {
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const [secondTextVisible, setSecondTextVisible] = useState(false);
   const [sourceSelectorVisible, setSourceSelectorVisible] = useState(false);
+  const [navigatedFromCards, setNavigatedFromCards] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar position="fixed">
-        <Toolbar sx={{ justifyContent: "end" }}>
+        <Toolbar sx={{ justifyContent: cardsSource ? "space-between" : "end" }}>
+          {cardsSource && (
+            <IconButton
+              sx={{
+                "&:focus": {
+                  outline: "none",
+                },
+              }}
+              onClick={() => setCardsSource(undefined)}
+              color="inherit"
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          )}
           <IconButton
             sx={{
               "&:focus": {
@@ -58,6 +72,7 @@ function App() {
           <Stack marginBottom="50px" alignItems="center">
             <Box height="48px" width="600px" display="flex" justifyContent="center" alignItems="center">
               <TypeAnimation
+                preRenderFirstString={navigatedFromCards}
                 sequence={[
                   `This is a simple app for aproaching vocabulary.\nJust upload a file with the following format:`, // Types 'One'
                   () => setSecondTextVisible(true),
@@ -82,8 +97,9 @@ function App() {
             <Box height="48px" width="600px" display="flex" justifyContent="center" alignItems="center">
               {secondTextVisible && (
                 <TypeAnimation
+                  preRenderFirstString={navigatedFromCards}
                   sequence={[
-                    "and you can start learning.", // Types 'One'
+                    "and you can start learning. Or try AI...", // Types 'One'
                     () => setSourceSelectorVisible(true),
                   ]}
                   wrapper="div"
@@ -97,12 +113,9 @@ function App() {
             <Fade in={sourceSelectorVisible}>
               <div>
                 <SourceSelector
-                  onFileSelected={file => {
-                    const fileReader = new AsyncTextFileReader();
-                    fileReader.read(file).then(text => {
-                      const source = parseSourcedFile(text);
-                      setCardsSource(source);
-                    });
+                  onFileSelected={source => {
+                    setNavigatedFromCards(true);
+                    setCardsSource(source);
                   }}
                 />
               </div>

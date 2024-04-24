@@ -12,6 +12,12 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
+jest.mock("./firebaseFunctions", () => {
+  return {
+    getVocabularySourceByAi: jest.fn().mockResolvedValue([{ front: "front", back: "back" }]),
+  };
+});
+
 import { act, render } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
