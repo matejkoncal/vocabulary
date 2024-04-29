@@ -13,7 +13,7 @@ export async function getVocabularySourceByAi(topSideLanguage: string, bottomSid
   const app = initializeApp(firebaseConfig);
   const functions = getFunctions(app);
   const func = httpsCallable(functions, "getVocabularySource");
-  const result = await func({ topSideLanguage, bottomSideLanguage, topic, count: 10 });
+  const result = await func({ topSideLanguage, bottomSideLanguage, topic, count: 50 });
   const parsedResult = JSON.parse(result.data as string);
   return parsedResult.cards as CardSource[];
 }
