@@ -91,7 +91,7 @@ function App() {
               <TypeAnimation
                 preRenderFirstString={navigatedFromCards}
                 sequence={[
-                  `This is a simple app for aproaching vocabulary.\nJust upload a file with the following format:`, // Types 'One'
+                  `This is a simple app for improve vocabulary.\nJust upload a file with the following format:`, // Types 'One'
                   () => setSecondTextVisible(true),
                 ]}
                 wrapper="div"
